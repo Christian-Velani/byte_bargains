@@ -95,10 +95,10 @@ class _CadastroPageState extends State<CadastroPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pop(context),
                   child: Text(
                     "Cadastrar",
-                    style: textoOpenSansRegular,
+                    style: textoOpenSansBold,
                   )),
             )
           ],

@@ -1,4 +1,5 @@
 import 'package:byte_bargains/cadastro.dart';
+import 'package:byte_bargains/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +11,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        routes: {"/Cadastro": (context) => CadastroPage()},
-        initialRoute: '/Cadastro');
+    return MaterialApp(routes: {
+      "/Cadastro": (context) => CadastroPage(),
+      "/Login": (context) => LoginPage()
+    }, initialRoute: '/Login');
   }
 }
