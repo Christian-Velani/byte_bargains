@@ -38,3 +38,9 @@ const textoOpenSansRegularBranco = TextStyle(
   fontSize: 16,
   color: Colors.white,
 );
+
+const textoOpenSansSemiBold = TextStyle(
+    fontFamily: "Open Sanas",
+    fontSize: 13,
+    color: Colors.white,
+    fontWeight: FontWeight.w600);

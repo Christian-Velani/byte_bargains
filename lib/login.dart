@@ -57,7 +57,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pushNamed("/Perfil"),
+                onPressed: () => Navigator.of(context).pushNamed("/Principal"),
                 child: Text(
                   "Entrar",
                   style: textoOpenSansBold,

@@ -1,6 +1,7 @@
 import 'package:byte_bargains/cadastro.dart';
 import 'package:byte_bargains/login.dart';
 import 'package:byte_bargains/perfil.dart';
+import 'package:byte_bargains/navigation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       "/Cadastro": (context) => CadastroPage(),
       "/Login": (context) => LoginPage(),
       "/Perfil": (context) => PerfilPage(),
+      "/Principal": (context) => NavigationPage(),
     }, initialRoute: '/Login');
   }
 }
