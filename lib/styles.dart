@@ -40,7 +40,14 @@ const textoOpenSansRegularBranco = TextStyle(
 );
 
 const textoOpenSansSemiBold = TextStyle(
-    fontFamily: "Open Sanas",
-    fontSize: 13,
-    color: Colors.white,
-    fontWeight: FontWeight.w600);
+  fontFamily: "Open Sanas",
+  fontSize: 13,
+  color: Colors.white,
+  fontWeight: FontWeight.w600,
+);
+
+const textoOpenSansRegularMini = TextStyle(
+  fontFamily: "Open Sans",
+  fontSize: 10,
+  color: Colors.grey,
+);

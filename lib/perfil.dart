@@ -16,14 +16,6 @@ class PerfilPage extends StatelessWidget {
         leading: BackButton(
           color: Colors.white,
         ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.mode_edit,
-            ),
-            onPressed: () {},
-          )
-        ],
       ),
       body: Column(
         children: [
@@ -86,32 +78,14 @@ class PerfilPage extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.rebase_edit,
+                  Icons.edit_outlined,
                   color: Colors.blue,
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
                   child: RichText(
                       text: TextSpan(
-                          text: "Alterar Email",
-                          recognizer: TapGestureRecognizer()..onTap = () {})),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 0, 20),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.flag_outlined,
-                  color: Colors.blue,
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: RichText(
-                      text: TextSpan(
-                          text: "Alterar Senha",
+                          text: "Alterar Perfil",
                           recognizer: TapGestureRecognizer()..onTap = () {})),
                 ),
               ],
