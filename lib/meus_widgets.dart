@@ -16,7 +16,7 @@ class JogoGrande extends StatelessWidget {
         Center(
           child: Container(
             margin: EdgeInsets.all(20),
-            height: 500,
+            height: 400,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50), color: Colors.white),
             width: 350,
@@ -65,14 +65,63 @@ class JogoPequeno extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.all(5),
-          height: 80,
+          height: 100,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5), color: Colors.white),
-          width: 80,
+          width: 100,
           child:
               ClipRRect(borderRadius: BorderRadius.circular(5), child: imagem),
         ),
         Text(nome, style: textoOpenSansRegularPequeno)
+      ],
+    );
+  }
+}
+
+class JogoPequenoHorizontal extends StatefulWidget {
+  final Image imagem;
+  final String nome;
+
+  const JogoPequenoHorizontal(
+      {super.key, required this.imagem, required this.nome});
+
+  @override
+  State<JogoPequenoHorizontal> createState() => _JogoPequenoHorizontalState();
+}
+
+class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
+  IconData icone = Icons.favorite_border;
+  Color cor = Colors.grey;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          margin: EdgeInsets.all(5),
+          height: 100,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5), color: Colors.white),
+          width: 100,
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(5), child: widget.imagem),
+        ),
+        Text(widget.nome, style: textoOpenSansSemiBold),
+        Spacer(),
+        IconButton(
+          alignment: Alignment.centerRight,
+          onPressed: () {
+            icone = icone == Icons.favorite_border
+                ? Icons.favorite
+                : Icons.favorite_border;
+            cor = cor == Colors.grey ? Colors.red : Colors.grey;
+            setState(() {});
+          },
+          icon: Icon(
+            icone,
+            color: cor,
+          ),
+        ),
       ],
     );
   }

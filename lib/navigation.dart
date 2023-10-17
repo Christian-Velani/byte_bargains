@@ -32,7 +32,19 @@ class _NavigationPageState extends State<NavigationPage> {
             'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
             fit: BoxFit.cover,
           ),
-          "Jogo 3")
+          "Jogo 3"),
+      Jogo(
+          Image.network(
+            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            fit: BoxFit.cover,
+          ),
+          "Jogo 4"),
+      Jogo(
+          Image.network(
+            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            fit: BoxFit.cover,
+          ),
+          "Jogo 5"),
     ],
     "Gênero 2": [
       Jogo(
@@ -246,6 +258,91 @@ class _NavigationPageState extends State<NavigationPage> {
               ),
             )
           ],
+        ),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Pesquisar",
+                    labelStyle: textoNotoSansBold,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Text(
+                "Resultados da Pesquisa",
+                style: textoNotoSansBoldGrande,
+              ),
+              SizedBox(
+                height: 531,
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          JogoPequenoHorizontal(
+                              imagem: Image.network(
+                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                                fit: BoxFit.cover,
+                              ),
+                              nome: "Jogo 1"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          JogoPequenoHorizontal(
+                              imagem: Image.network(
+                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                                fit: BoxFit.cover,
+                              ),
+                              nome: "Jogo 1"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          JogoPequenoHorizontal(
+                              imagem: Image.network(
+                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                                fit: BoxFit.cover,
+                              ),
+                              nome: "Jogo 1"),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        children: [
+                          JogoPequenoHorizontal(
+                              imagem: Image.network(
+                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                                fit: BoxFit.cover,
+                              ),
+                              nome: "Jogo 1"),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         )
       ][indexPaginaAtual],
     );

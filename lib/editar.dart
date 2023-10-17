@@ -7,14 +7,14 @@ import 'package:image_picker/image_picker.dart';
 
 import 'styles.dart';
 
-class CadastroPage extends StatefulWidget {
-  const CadastroPage({super.key});
+class EditarPage extends StatefulWidget {
+  const EditarPage({super.key});
 
   @override
-  State<CadastroPage> createState() => _CadastroPageState();
+  State<EditarPage> createState() => _CadastroPageState();
 }
 
-class _CadastroPageState extends State<CadastroPage> {
+class _CadastroPageState extends State<EditarPage> {
   XFile? image;
 
   void subirImagem() async {
@@ -104,7 +104,7 @@ class _CadastroPageState extends State<CadastroPage> {
               child: ElevatedButton(
                   onPressed: () => Navigator.pop(context),
                   child: Text(
-                    "Cadastrar",
+                    "Editar",
                     style: textoOpenSansBold,
                   )),
             )

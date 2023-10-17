@@ -60,24 +60,6 @@ class PerfilPage extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.favorite_border,
-                  color: Colors.blue,
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: RichText(
-                      text: TextSpan(
-                          text: "Lista de Desejos",
-                          recognizer: TapGestureRecognizer()..onTap = () {})),
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 0, 20),
-            child: Row(
-              children: [
-                Icon(
                   Icons.edit_outlined,
                   color: Colors.blue,
                 ),
@@ -86,7 +68,9 @@ class PerfilPage extends StatelessWidget {
                   child: RichText(
                       text: TextSpan(
                           text: "Alterar Perfil",
-                          recognizer: TapGestureRecognizer()..onTap = () {})),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () =>
+                                Navigator.of(context).pushNamed("/Editar"))),
                 ),
               ],
             ),
