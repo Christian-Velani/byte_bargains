@@ -95,34 +95,37 @@ class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          margin: EdgeInsets.all(5),
-          height: 100,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.white),
-          width: 100,
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(5), child: widget.imagem),
-        ),
-        Text(widget.nome, style: textoOpenSansSemiBold),
-        Spacer(),
-        IconButton(
-          alignment: Alignment.centerRight,
-          onPressed: () {
-            icone = icone == Icons.favorite_border
-                ? Icons.favorite
-                : Icons.favorite_border;
-            cor = cor == Colors.grey ? Colors.red : Colors.grey;
-            setState(() {});
-          },
-          icon: Icon(
-            icone,
-            color: cor,
+    return Container(
+      width: 384,
+      child: Row(
+        children: [
+          Container(
+            margin: EdgeInsets.all(5),
+            height: 100,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5), color: Colors.white),
+            width: 100,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(5), child: widget.imagem),
           ),
-        ),
-      ],
+          Text(widget.nome, style: textoOpenSansSemiBold),
+          Spacer(),
+          IconButton(
+            alignment: Alignment.centerRight,
+            onPressed: () {
+              icone = icone == Icons.favorite_border
+                  ? Icons.favorite
+                  : Icons.favorite_border;
+              cor = cor == Colors.grey ? Colors.blue : Colors.grey;
+              setState(() {});
+            },
+            icon: Icon(
+              icone,
+              color: cor,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

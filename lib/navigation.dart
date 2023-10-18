@@ -286,58 +286,36 @@ class _NavigationPageState extends State<NavigationPage> {
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          JogoPequenoHorizontal(
-                              imagem: Image.network(
-                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              nome: "Jogo 1"),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          JogoPequenoHorizontal(
-                              imagem: Image.network(
-                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              nome: "Jogo 1"),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          JogoPequenoHorizontal(
-                              imagem: Image.network(
-                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              nome: "Jogo 1"),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          JogoPequenoHorizontal(
-                              imagem: Image.network(
-                                'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
-                                fit: BoxFit.cover,
-                              ),
-                              nome: "Jogo 1"),
-                        ],
-                      ),
-                    ),
+                    JogoPequenoHorizontal(
+                        imagem: Image.network(
+                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                        nome: "Jogo 1"),
+                    JogoPequenoHorizontal(
+                        imagem: Image.network(
+                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                        nome: "Jogo 1"),
+                    JogoPequenoHorizontal(
+                        imagem: Image.network(
+                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                        nome: "Jogo 1"),
+                    JogoPequenoHorizontal(
+                        imagem: Image.network(
+                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                        nome: "Jogo 1"),
+                    JogoPequenoHorizontal(
+                        imagem: Image.network(
+                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                        nome: "Jogo 1"),
                   ],
                 ),
               )
