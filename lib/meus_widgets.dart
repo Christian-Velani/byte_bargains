@@ -20,8 +20,11 @@ class JogoGrande extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50), color: Colors.white),
             width: 350,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(50), child: imagem),
+            child: GestureDetector(
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50), child: imagem),
+              onTap: () => Navigator.of(context).pushNamed('/Jogo'),
+            ),
           ),
         ),
         Positioned(
