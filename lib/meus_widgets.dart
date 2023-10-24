@@ -166,9 +166,64 @@ class GeneroContainer extends StatelessWidget {
   }
 }
 
+class LojaPreco extends StatelessWidget {
+  String nomeLoja;
+  String preco;
+  Estado estado;
+
+  LojaPreco(this.nomeLoja, this.preco, this.estado);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 40,
+      width: 321,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15), color: Colors.grey),
+      child: Row(
+        children: [
+          Text(
+            nomeLoja,
+            style: textoOpenSansRegularPequenoBranco,
+          ),
+          Spacer(),
+          Container(
+            alignment: Alignment.centerRight,
+            child: const Icon(
+              Icons.monetization_on_outlined,
+              color: Colors.blue,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerRight,
+            child: estado == Estado.normal
+                ? Text("R\$$preco", style: textoOpenSansRegularPequeno)
+                : estado == Estado.desconto
+                    ? Row(
+                        children: [
+                          Text(
+                            "R\$$preco",
+                            style: textoPrecoDesconto,
+                          ),
+                          Text("R\$$preco", style: textoPrecoOriginal)
+                        ],
+                      )
+                    : const Text(
+                        "Indisponivel",
+                        style: textoOpenSansRegularPequeno,
+                      ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
 class Jogo {
   Image imagem;
   String nome;
 
   Jogo(this.imagem, this.nome);
 }
+
+enum Estado { normal, desconto, indisponivel }

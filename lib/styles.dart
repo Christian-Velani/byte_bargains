@@ -39,6 +39,12 @@ const textoOpenSansRegularBranco = TextStyle(
   color: Colors.white,
 );
 
+const textoOpenSansRegularPequenoBranco = TextStyle(
+  fontFamily: "Open Sans",
+  fontSize: 13,
+  color: Colors.white,
+);
+
 const textoOpenSansSemiBold = TextStyle(
   fontFamily: "Open Sanas",
   fontSize: 13,
@@ -50,4 +56,17 @@ const textoOpenSansRegularMini = TextStyle(
   fontFamily: "Open Sans",
   fontSize: 10,
   color: Colors.grey,
+);
+
+const textoPrecoDesconto = TextStyle(
+  fontFamily: "Open Sans",
+  fontSize: 13,
+  color: Color(0x006C9D77),
+);
+
+const textoPrecoOriginal = TextStyle(
+  fontFamily: "Open Sanas",
+  fontSize: 13,
+  color: Color(0x0B26858),
+  decoration: TextDecoration.lineThrough,
 );
