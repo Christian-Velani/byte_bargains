@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:byte_bargains/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:blurrycontainer/blurrycontainer.dart';
@@ -7,7 +9,7 @@ class JogoGrande extends StatelessWidget {
   String nome;
   String minitexto;
 
-  JogoGrande(this.imagem, this.nome, this.minitexto);
+  JogoGrande(this.imagem, this.nome, this.minitexto, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class JogoGrande extends StatelessWidget {
       children: <Widget>[
         Center(
           child: Container(
-            margin: EdgeInsets.all(20),
+            margin: const EdgeInsets.all(20),
             height: 400,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50), color: Colors.white),
@@ -60,14 +62,14 @@ class JogoPequeno extends StatelessWidget {
   Image imagem;
   String nome;
 
-  JogoPequeno(this.imagem, this.nome);
+  JogoPequeno(this.imagem, this.nome, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           height: 100,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5), color: Colors.white),
@@ -98,12 +100,12 @@ class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 384,
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             height: 100,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5), color: Colors.white),
@@ -112,7 +114,7 @@ class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
                 borderRadius: BorderRadius.circular(5), child: widget.imagem),
           ),
           Text(widget.nome, style: textoOpenSansSemiBold),
-          Spacer(),
+          const Spacer(),
           IconButton(
             alignment: Alignment.centerRight,
             onPressed: () {
@@ -137,15 +139,14 @@ class GeneroContainer extends StatelessWidget {
   String genero;
   List<Jogo>? jogos;
 
-  GeneroContainer(this.genero, this.jogos);
+  GeneroContainer(this.genero, this.jogos, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(5, 10, 0, 5),
+          margin: const EdgeInsets.fromLTRB(5, 10, 0, 5),
           alignment: Alignment.centerLeft,
           child: Text(
             genero,
@@ -171,30 +172,30 @@ class LojaPreco extends StatelessWidget {
   String preco;
   Estado estado;
 
-  LojaPreco(this.nomeLoja, this.preco, this.estado);
+  LojaPreco(this.nomeLoja, this.preco, this.estado, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       height: 40,
       width: 321,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        color: Color.fromARGB(255, 41, 41, 41),
+        color: const Color.fromARGB(255, 41, 41, 41),
       ),
       child: Row(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 20),
+            margin: const EdgeInsets.only(left: 20),
             child: Text(
               nomeLoja,
               style: textoOpenSansRegularPequenoBranco,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Container(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             alignment: Alignment.centerRight,
             child: const Icon(
               Icons.monetization_on_outlined,
@@ -205,27 +206,27 @@ class LojaPreco extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: estado == Estado.normal
                 ? Container(
-                    margin: EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
                     child:
                         Text("R\$$preco", style: textoOpenSansRegularPequeno))
                 : estado == Estado.desconto
                     ? Row(
                         children: [
                           Container(
-                            margin: EdgeInsets.all(10),
+                            margin: const EdgeInsets.all(10),
                             child: Text(
                               "R\$$preco",
                               style: textoPrecoDesconto,
                             ),
                           ),
                           Container(
-                              margin: EdgeInsets.all(10),
+                              margin: const EdgeInsets.all(10),
                               child:
                                   Text("R\$$preco", style: textoPrecoOriginal))
                         ],
                       )
                     : Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         child: const Text(
                           "Indisponivel",
                           style: textoOpenSansRegularPequeno,
