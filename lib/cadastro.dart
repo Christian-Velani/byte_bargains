@@ -5,10 +5,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'styles.dart';
 
 class CadastroPage extends StatefulWidget {
-  const CadastroPage({super.key});
+  CadastroPage({super.key});
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   State<CadastroPage> createState() => _CadastroPageState();
@@ -20,6 +24,18 @@ class _CadastroPageState extends State<CadastroPage> {
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {});
+  }
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+  
+  Future<void> cadastrarUsuario(
+      String nomeUsuario, String email, String senha) async {
+    try {
+      await auth.createUserWithEmailAndPassword(email: email, password: senha);
+      // Redirecionar o usuário para a próxima tela do aplicativo
+    } catch (e) {
+      // Tratar o erro
+    }
   }
 
   @override

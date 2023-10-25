@@ -2,9 +2,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:byte_bargains/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  final FirebaseFirestore db = FirebaseFirestore.instance;
+  final txtNameCtrl = TextEditingController();
+  final txtSenhaCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +29,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 width: 300,
                 child: TextField(
+                  controller: txtNameCtrl,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Usuário",
@@ -36,6 +41,7 @@ class LoginPage extends StatelessWidget {
               Container(
                 width: 300,
                 child: TextField(
+                  controller: txtSenhaCtrl,
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -59,13 +65,17 @@ class LoginPage extends StatelessWidget {
                 margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed("/Principal"),
-                  child: Text(
-                    "Entrar",
-                    style: textoOpenSansBold,
-                  ),
-                ),
+                    child: Text(
+                      "Entrar",
+                      style: textoOpenSansBold,
+                    ),
+                    onPressed: () {
+                      db.collection('Usuario').add({
+                        'Nome': txtNameCtrl.text,
+                        'Senha': txtSenhaCtrl.text
+                      });
+                      Navigator.of(context).pushNamed("/Principal");
+                    }),
               ),
               SizedBox(
                 width: double.infinity,
