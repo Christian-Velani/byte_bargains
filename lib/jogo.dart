@@ -64,9 +64,7 @@ class _JogoPageState extends State<JogoPage> {
               ],
             ),
             Container(
-              margin: EdgeInsets.only(
-                top: 20,
-              ),
+              margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
               height: 57,
               width: 321,
               child: ElevatedButton(
@@ -94,13 +92,17 @@ class _JogoPageState extends State<JogoPage> {
                 ),
               ),
             ),
-            ListView(
-              scrollDirection: Axis.vertical,
-              children: [
-                LojaPreco("Loja 1", "100", Estado.normal),
-                LojaPreco("Loja 1", "100", Estado.indisponivel),
-                LojaPreco("Loja 1", "100", Estado.desconto),
-              ],
+            SizedBox(
+              height: 330,
+              width: 321,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  LojaPreco("Loja 1", "100", Estado.normal),
+                  LojaPreco("Loja 1", "100", Estado.indisponivel),
+                  LojaPreco("Loja 1", "100", Estado.desconto),
+                ],
+              ),
             )
           ],
         ),

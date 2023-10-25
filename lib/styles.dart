@@ -61,12 +61,12 @@ const textoOpenSansRegularMini = TextStyle(
 const textoPrecoDesconto = TextStyle(
   fontFamily: "Open Sans",
   fontSize: 13,
-  color: Color(0x006C9D77),
+  color: Colors.green,
 );
 
 const textoPrecoOriginal = TextStyle(
   fontFamily: "Open Sanas",
   fontSize: 13,
-  color: Color(0x0B26858),
+  color: Colors.red,
   decoration: TextDecoration.lineThrough,
 );

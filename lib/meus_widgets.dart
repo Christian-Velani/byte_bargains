@@ -176,18 +176,25 @@ class LojaPreco extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.all(10),
       height: 40,
       width: 321,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15), color: Colors.grey),
+        borderRadius: BorderRadius.circular(15),
+        color: Color.fromARGB(255, 41, 41, 41),
+      ),
       child: Row(
         children: [
-          Text(
-            nomeLoja,
-            style: textoOpenSansRegularPequenoBranco,
+          Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Text(
+              nomeLoja,
+              style: textoOpenSansRegularPequenoBranco,
+            ),
           ),
           Spacer(),
           Container(
+            margin: EdgeInsets.all(10),
             alignment: Alignment.centerRight,
             child: const Icon(
               Icons.monetization_on_outlined,
@@ -197,20 +204,32 @@ class LojaPreco extends StatelessWidget {
           Container(
             alignment: Alignment.centerRight,
             child: estado == Estado.normal
-                ? Text("R\$$preco", style: textoOpenSansRegularPequeno)
+                ? Container(
+                    margin: EdgeInsets.all(10),
+                    child:
+                        Text("R\$$preco", style: textoOpenSansRegularPequeno))
                 : estado == Estado.desconto
                     ? Row(
                         children: [
-                          Text(
-                            "R\$$preco",
-                            style: textoPrecoDesconto,
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                              "R\$$preco",
+                              style: textoPrecoDesconto,
+                            ),
                           ),
-                          Text("R\$$preco", style: textoPrecoOriginal)
+                          Container(
+                              margin: EdgeInsets.all(10),
+                              child:
+                                  Text("R\$$preco", style: textoPrecoOriginal))
                         ],
                       )
-                    : const Text(
-                        "Indisponivel",
-                        style: textoOpenSansRegularPequeno,
+                    : Container(
+                        margin: EdgeInsets.all(10),
+                        child: const Text(
+                          "Indisponivel",
+                          style: textoOpenSansRegularPequeno,
+                        ),
                       ),
           )
         ],
