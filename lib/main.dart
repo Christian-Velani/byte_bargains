@@ -4,9 +4,19 @@ import 'package:byte_bargains/jogo.dart';
 import 'package:byte_bargains/login.dart';
 import 'package:byte_bargains/perfil.dart';
 import 'package:byte_bargains/navigation.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+const firebaseConfig = FirebaseOptions(
+  apiKey: "AIzaSyBYtI828ak7q5Qt45cCMzWRp1v7oL6mMGc",
+  projectId: "bytebargains-61f1e",
+  storageBucket: "bytebargains-61f1e.appspot.com",
+  messagingSenderId: "1060388765263",
+  appId: "1:1060388765263:android:3e7c835e56386c3a02343a",
+);
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: firebaseConfig);
   runApp(const MyApp());
 }
 
