@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:validation_textformfield/validation_textformfield.dart';
 //import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'styles.dart';
@@ -20,6 +21,7 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   XFile? image;
+  late TextEditingController usuarioController;
 
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -27,7 +29,7 @@ class _CadastroPageState extends State<CadastroPage> {
   }
 
   FirebaseAuth auth = FirebaseAuth.instance;
-  
+
   Future<void> cadastrarUsuario(
       String nomeUsuario, String email, String senha) async {
     try {
@@ -70,7 +72,8 @@ class _CadastroPageState extends State<CadastroPage> {
             ),
             Container(
               width: 300,
-              child: TextField(
+              child: TextFormField(
+                controller: usuarioController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Usuário",
