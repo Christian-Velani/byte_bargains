@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:validation_textformfield/validation_textformfield.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:validation_textformfield/validation_textformfield.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'styles.dart';
 
@@ -21,22 +21,30 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   XFile? image;
-  late TextEditingController usuarioController;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
+  final usuarioController = TextEditingController();
+  final emailController = TextEditingController();
+  final senhaController = TextEditingController();
+  final firestore = FirebaseFirestore.instance;
 
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {});
   }
 
-  FirebaseAuth auth = FirebaseAuth.instance;
-
-  Future<void> cadastrarUsuario(
-      String nomeUsuario, String email, String senha) async {
+  void cadastrar() async {
     try {
-      await auth.createUserWithEmailAndPassword(email: email, password: senha);
-      // Redirecionar o usuário para a próxima tela do aplicativo
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: senhaController.text,
+      );
+      userCredential.user!.updateDisplayName(usuarioController.text);
+      userCredential.user!.updateEmail(emailController.text);
+
+      Navigator.pop(context);
     } catch (e) {
-      // Tratar o erro
+      print(e);
     }
   }
 
@@ -85,6 +93,7 @@ class _CadastroPageState extends State<CadastroPage> {
             Container(
               width: 300,
               child: TextField(
+                controller: emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -97,6 +106,7 @@ class _CadastroPageState extends State<CadastroPage> {
             Container(
               width: 300,
               child: TextField(
+                controller: senhaController,
                 obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -121,11 +131,12 @@ class _CadastroPageState extends State<CadastroPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    "Cadastrar",
-                    style: textoOpenSansBold,
-                  )),
+                child: Text(
+                  "Cadastrar",
+                  style: textoOpenSansBold,
+                ),
+                onPressed: cadastrar,
+              ),
             )
           ],
         ),
