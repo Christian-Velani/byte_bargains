@@ -39,7 +39,6 @@ dependencies:
   firebase_core: ^2.17.0
   cloud_firestore: ^4.9.3
   firebase_auth: ^4.12.0
-  validation_textformfield: ^2.2.5
 
 dev_dependencies:
   flutter_test:
