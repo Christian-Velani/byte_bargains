@@ -4,10 +4,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'styles.dart';
 
 class CadastroPage extends StatefulWidget {
@@ -30,15 +28,20 @@ class _CadastroPageState extends State<CadastroPage> {
     setState(() {});
   }
 
-  FirebaseAuth auth = FirebaseAuth.instance;
 
-  Future<void> cadastrarUsuario(
-      String nomeUsuario, String email, String senha) async {
+  void cadastrar() async {
     try {
-      await auth.createUserWithEmailAndPassword(email: email, password: senha);
-      // Redirecionar o usuário para a próxima tela do aplicativo
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: senhaController.text,
+      );
+      userCredential.user!.updateDisplayName(usuarioController.text);
+      userCredential.user!.updateEmail(emailController.text);
+
+      Navigator.pop(context);
     } catch (e) {
-      // Tratar o erro
+      print(e);
     }
   }
 
@@ -178,6 +181,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        cadastrar
                         Navigator.pop(context);
                       }
                     },

@@ -3,6 +3,7 @@
 import 'package:byte_bargains/meus_widgets.dart';
 import 'package:byte_bargains/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
@@ -17,31 +18,31 @@ class _NavigationPageState extends State<NavigationPage> {
     "Gênero 1": [
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 1"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 2"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 3"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 4"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 5"),
@@ -49,19 +50,19 @@ class _NavigationPageState extends State<NavigationPage> {
     "Gênero 2": [
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 1"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 2"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 3")
@@ -69,19 +70,19 @@ class _NavigationPageState extends State<NavigationPage> {
     "Gênero 3": [
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 1"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 2"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 3")
@@ -89,19 +90,19 @@ class _NavigationPageState extends State<NavigationPage> {
     "Gênero 4": [
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 1"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 2"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 3")
@@ -109,19 +110,19 @@ class _NavigationPageState extends State<NavigationPage> {
     "Gênero 5": [
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 1"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 2"),
       Jogo(
           Image.network(
-            'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+            'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
             fit: BoxFit.cover,
           ),
           "Jogo 3")
@@ -142,7 +143,7 @@ class _NavigationPageState extends State<NavigationPage> {
           onPressed: () => Navigator.of(context).pushNamed("/Perfil"),
         ),
         title: Text(
-          "Olá, Usuário!",
+          "Olá, ${FirebaseAuth.instance.currentUser!.displayName}",
           style: textoOpenSansSemiBold,
         ),
       ),
@@ -211,21 +212,21 @@ class _NavigationPageState extends State<NavigationPage> {
               children: [
                 JogoGrande(
                     Image.network(
-                      'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                      'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                       fit: BoxFit.cover,
                     ),
                     'Jogo 1',
                     "minitexto jogo 1"),
                 JogoGrande(
                     Image.network(
-                      'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                      'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                       fit: BoxFit.cover,
                     ),
                     'Jogo 2',
                     "minitexto jogo 2"),
                 JogoGrande(
                     Image.network(
-                      'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                      'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                       fit: BoxFit.cover,
                     ),
                     'Jogo 3',
@@ -288,31 +289,31 @@ class _NavigationPageState extends State<NavigationPage> {
                   children: [
                     JogoPequenoHorizontal(
                         imagem: Image.network(
-                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                           fit: BoxFit.cover,
                         ),
                         nome: "Jogo 1"),
                     JogoPequenoHorizontal(
                         imagem: Image.network(
-                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                           fit: BoxFit.cover,
                         ),
                         nome: "Jogo 1"),
                     JogoPequenoHorizontal(
                         imagem: Image.network(
-                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                           fit: BoxFit.cover,
                         ),
                         nome: "Jogo 1"),
                     JogoPequenoHorizontal(
                         imagem: Image.network(
-                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                           fit: BoxFit.cover,
                         ),
                         nome: "Jogo 1"),
                     JogoPequenoHorizontal(
                         imagem: Image.network(
-                          'https://www.showmetech.com.br/wp-content/uploads//2019/11/Minecraft1-1920x1024.jpg',
+                          'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
                           fit: BoxFit.cover,
                         ),
                         nome: "Jogo 1"),
