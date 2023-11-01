@@ -28,7 +28,6 @@ class _CadastroPageState extends State<CadastroPage> {
     setState(() {});
   }
 
-
   void cadastrar() async {
     try {
       UserCredential userCredential =
@@ -38,8 +37,6 @@ class _CadastroPageState extends State<CadastroPage> {
       );
       userCredential.user!.updateDisplayName(usuarioController.text);
       userCredential.user!.updateEmail(emailController.text);
-
-      Navigator.pop(context);
     } catch (e) {
       print(e);
     }
@@ -181,7 +178,7 @@ class _CadastroPageState extends State<CadastroPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        cadastrar
+                        cadastrar();
                         Navigator.pop(context);
                       }
                     },
