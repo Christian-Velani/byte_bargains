@@ -136,11 +136,19 @@ class _NavigationPageState extends State<NavigationPage> {
         toolbarHeight: 100,
         leadingWidth: 100,
         backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Image.asset(
-            'images/icon.png',
+        leading: SizedBox(
+          height: 100,
+          width: 100,
+          child: GestureDetector(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.network(
+                FirebaseAuth.instance.currentUser!.photoURL!,
+                fit: BoxFit.fill,
+              ),
+            ),
+            onTap: () => Navigator.of(context).pushNamed("/Perfil"),
           ),
-          onPressed: () => Navigator.of(context).pushNamed("/Perfil"),
         ),
         title: Text(
           "Olá, ${FirebaseAuth.instance.currentUser!.displayName}",

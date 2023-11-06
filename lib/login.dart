@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:byte_bargains/styles.dart';
@@ -9,6 +10,20 @@ class LoginPage extends StatelessWidget {
   final FirebaseFirestore db = FirebaseFirestore.instance;
   final txtNameCtrl = TextEditingController();
   final txtSenhaCtrl = TextEditingController();
+
+  void Logar() async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: txtNameCtrl.text, password: txtSenhaCtrl.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+    print(FirebaseAuth.instance.currentUser!.photoURL!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +47,7 @@ class LoginPage extends StatelessWidget {
                   controller: txtNameCtrl,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Usuário",
+                    labelText: "E-mail",
                     labelStyle: textoNotoSansBold,
                   ),
                   style: TextStyle(color: Colors.white),
@@ -70,10 +85,7 @@ class LoginPage extends StatelessWidget {
                       style: textoOpenSansBold,
                     ),
                     onPressed: () {
-                      db.collection('Usuario').add({
-                        'Nome': txtNameCtrl.text,
-                        'Senha': txtSenhaCtrl.text
-                      });
+                      Logar();
                       Navigator.of(context).pushNamed("/Principal");
                     }),
               ),

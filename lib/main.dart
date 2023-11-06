@@ -8,11 +8,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 const firebaseConfig = FirebaseOptions(
-  apiKey: "AIzaSyBYtI828ak7q5Qt45cCMzWRp1v7oL6mMGc",
-  projectId: "bytebargains-61f1e",
-  storageBucket: "bytebargains-61f1e.appspot.com",
-  messagingSenderId: "1060388765263",
-  appId: "1:1060388765263:android:3e7c835e56386c3a02343a",
+  apiKey: "AIzaSyAyWGS59TxiiBaHRpx8dVaS6DWyMGSIok0",
+  projectId: "byte-bargains",
+  storageBucket: "byte-bargains.appspot.com",
+  messagingSenderId: "926471454978",
+  appId: "1:926471454978:android:8ec18cbb79026b5891421b",
 );
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

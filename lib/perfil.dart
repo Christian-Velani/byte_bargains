@@ -1,11 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:byte_bargains/styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class PerfilPage extends StatelessWidget {
   const PerfilPage({super.key});
+
+  void Logout() async {
+    await FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +42,8 @@ class PerfilPage extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: CircleAvatar(
                     radius: 80,
-                    child: Image.asset('images/icon.png'),
+                    child: Image.network(
+                        FirebaseAuth.instance.currentUser!.photoURL!),
                   ),
                 ),
                 Column(
@@ -80,7 +86,10 @@ class PerfilPage extends StatelessWidget {
               child: SizedBox(
                 width: 250,
                 child: ElevatedButton(
-                  onPressed: () => Navigator.of(context).pushNamed("/Login"),
+                  onPressed: () {
+                    Logout();
+                    Navigator.of(context).pushNamed("/Login");
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
                       shape: RoundedRectangleBorder(

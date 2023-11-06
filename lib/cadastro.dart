@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,8 +34,21 @@ class _CadastroPageState extends State<CadastroPage> {
         email: emailController.text,
         password: senhaController.text,
       );
+      final storageRef =
+          FirebaseStorage.instance.ref().child('imagens/${image!.name}');
+      await storageRef.putFile(File(image!.path));
+      final downloadURL = await storageRef.getDownloadURL();
+
+      userCredential.user!.updatePhotoURL(downloadURL);
+
       userCredential.user!.updateDisplayName(usuarioController.text);
       userCredential.user!.updateEmail(emailController.text);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
     } catch (e) {
       print(e);
     }
@@ -87,7 +99,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       return ((value != null &&
                                   value.toString().length >= 6 &&
                                   value.toString().length <= 30) &&
-                              (value.isEmpty))
+                              (value.isNotEmpty))
                           ? null
                           : 'O nome de usuário tem que ser entre 6 e 30 caracteres';
                     },
@@ -137,7 +149,7 @@ class _CadastroPageState extends State<CadastroPage> {
                           return "A senha deve ter de 7 a 30 caracteres";
                         } else if (!value.contains(RegExp(r'[0-9]'))) {
                           return "A senha precisa ter 1 número";
-                        } else if (!value.contains(RegExp(r'[A-z]'))) {
+                        } else if (!value.contains(RegExp(r'[A-Z]'))) {
                           return "A senha tem que ter uma letra maíscula";
                         } else if (!value.contains(RegExp(r'[!@#$%&*]'))) {
                           return "A senha tem que ter um caracter especial [!@#\$%*&]";
@@ -177,9 +189,30 @@ class _CadastroPageState extends State<CadastroPage> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        cadastrar();
-                        Navigator.pop(context);
+                      if (image != null) {
+                        if (_formKey.currentState!.validate()) {
+                          cadastrar();
+                          Navigator.pop(context);
+                        }
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Imagem não selecionada'),
+                              content: Text(
+                                  'Por favor, selecione uma imagem antes de cadastrar-se.'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Ok'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                     child: Text(
