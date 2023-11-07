@@ -40,20 +40,27 @@ class PerfilPage extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(right: 50),
                   alignment: Alignment.centerLeft,
-                  child: CircleAvatar(
-                    radius: 80,
-                    child: Image.network(
-                        FirebaseAuth.instance.currentUser!.photoURL!),
+                  child: Container(
+                    margin: EdgeInsets.only(left: 10),
+                    height: 100,
+                    width: 100,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.network(
+                        FirebaseAuth.instance.currentUser!.photoURL!,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                 ),
                 Column(
                   children: [
                     Text(
-                      "Usuário",
+                      FirebaseAuth.instance.currentUser!.displayName!,
                       style: textoOpenSansBold,
                     ),
                     Text(
-                      "email@email.com",
+                      FirebaseAuth.instance.currentUser!.email!,
                       style: textoOpenSansRegularPequeno,
                     )
                   ],
@@ -88,7 +95,7 @@ class PerfilPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     Logout();
-                    Navigator.of(context).pushNamed("/Login");
+                    Navigator.of(context).popAndPushNamed("/Login");
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

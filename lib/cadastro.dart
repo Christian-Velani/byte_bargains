@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +43,41 @@ class _CadastroPageState extends State<CadastroPage> {
 
       userCredential.user!.updateDisplayName(usuarioController.text);
       userCredential.user!.updateEmail(emailController.text);
+
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+      if (e.code == "invalid-email") {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Cadastro Incompleto"),
+              content: Text("Insira um E-mail válido"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Ok"),
+                ),
+              ],
+            );
+          },
+        );
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Cadastro Incompleto"),
+              content: Text("Email já está em uso"),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Ok"),
+                ),
+              ],
+            );
+          },
+        );
       }
     } catch (e) {
       print(e);
@@ -192,7 +222,6 @@ class _CadastroPageState extends State<CadastroPage> {
                       if (image != null) {
                         if (_formKey.currentState!.validate()) {
                           cadastrar();
-                          Navigator.pop(context);
                         }
                       } else {
                         showDialog(

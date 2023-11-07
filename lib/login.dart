@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +11,65 @@ class LoginPage extends StatelessWidget {
   final txtNameCtrl = TextEditingController();
   final txtSenhaCtrl = TextEditingController();
 
-  void Logar() async {
-    try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: txtNameCtrl.text, password: txtSenhaCtrl.text);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+  void Logar(BuildContext context) async {
+    if (txtNameCtrl.text.isNotEmpty && txtSenhaCtrl.text.isNotEmpty) {
+      try {
+        final credential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: txtNameCtrl.text, password: txtSenhaCtrl.text);
+        Navigator.of(context).pushNamed("/Principal");
+      } on FirebaseAuthException catch (e) {
+        if (e.code == "invalid-email") {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Erro ao logar"),
+                content: Text("Insira um E-mail válido"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text("Ok"),
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (e.code == "INVALID_LOGIN_CREDENTIALS") {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Erro ao logar"),
+                content: Text("Email ou senha incorretos"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text("Ok"),
+                  ),
+                ],
+              );
+            },
+          );
+        }
       }
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Problema ao Logar"),
+            content: Text("Insira um Email/Senha válidos"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text("Ok"),
+              ),
+            ],
+          );
+        },
+      );
     }
-    print(FirebaseAuth.instance.currentUser!.photoURL!);
   }
 
   @override
@@ -45,6 +92,7 @@ class LoginPage extends StatelessWidget {
                 width: 300,
                 child: TextField(
                   controller: txtNameCtrl,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "E-mail",
@@ -72,7 +120,48 @@ class LoginPage extends StatelessWidget {
                   text: TextSpan(
                     text: "Esqueceu a senha?",
                     style: textoOpenSansRegular,
-                    recognizer: TapGestureRecognizer()..onTap = () {},
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        if (txtNameCtrl.text.isNotEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Email Enviado"),
+                                content: Text(
+                                    "Se o ${txtNameCtrl.text} for um email cadastro, foi enviado um email para recuperação da senha"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    child: Text("Ok"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          FirebaseAuth.instance
+                              .sendPasswordResetEmail(email: txtNameCtrl.text);
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text("Recuperar Senha"),
+                                content: Text(
+                                    "Para Recuperar a senha insira um email no campo Email"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                    child: Text("Ok"),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
                   ),
                 ),
               ),
@@ -85,8 +174,7 @@ class LoginPage extends StatelessWidget {
                       style: textoOpenSansBold,
                     ),
                     onPressed: () {
-                      Logar();
-                      Navigator.of(context).pushNamed("/Principal");
+                      Logar(context);
                     }),
               ),
               SizedBox(

@@ -134,9 +134,10 @@ class _NavigationPageState extends State<NavigationPage> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         toolbarHeight: 100,
-        leadingWidth: 100,
+        leadingWidth: 110,
         backgroundColor: Colors.transparent,
-        leading: SizedBox(
+        leading: Container(
+          margin: EdgeInsets.only(left: 10),
           height: 100,
           width: 100,
           child: GestureDetector(
