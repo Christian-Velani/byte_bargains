@@ -87,7 +87,7 @@ class _CadastroPageState extends State<CadastroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0x001F2228),
+      backgroundColor: Colors.black,
       body: SafeArea(
         top: true,
         child: Form(

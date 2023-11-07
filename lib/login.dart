@@ -105,7 +105,7 @@ class LoginPage extends StatelessWidget {
                 width: 300,
                 child: TextField(
                   controller: txtSenhaCtrl,
-                  obscureText: true,
+                  obscureText: false,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: "Senha",

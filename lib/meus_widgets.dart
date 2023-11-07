@@ -68,14 +68,17 @@ class JogoPequeno extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.all(5),
-          height: 100,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5), color: Colors.white),
-          width: 100,
-          child:
-              ClipRRect(borderRadius: BorderRadius.circular(5), child: imagem),
+        GestureDetector(
+          child: Container(
+            margin: const EdgeInsets.all(5),
+            height: 100,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5), color: Colors.white),
+            width: 100,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(5), child: imagem),
+          ),
+          onTap: () => Navigator.of(context).pushNamed('/Jogo'),
         ),
         Text(nome, style: textoOpenSansRegularPequeno)
       ],
@@ -104,14 +107,17 @@ class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
       width: 384,
       child: Row(
         children: [
-          Container(
-            margin: const EdgeInsets.all(5),
-            height: 100,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5), color: Colors.white),
-            width: 100,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(5), child: widget.imagem),
+          GestureDetector(
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              height: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5), color: Colors.white),
+              width: 100,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5), child: widget.imagem),
+            ),
+            onTap: () => Navigator.of(context).pushNamed('/Jogo'),
           ),
           Text(widget.nome, style: textoOpenSansSemiBold),
           const Spacer(),

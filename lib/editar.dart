@@ -44,20 +44,19 @@ class _EditarPageState extends State<EditarPage> {
     FirebaseAuth.instance.currentUser!
         .updateDisplayName(usuarioController.text);
 
-    await FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(
-      EmailAuthProvider.credential(
-          email: FirebaseAuth.instance.currentUser!.email!,
-          password: senhaController.text),
-    );
+    // await FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(
+    //   EmailAuthProvider.credential(
+    //       email: FirebaseAuth.instance.currentUser!.email!,
+    //       password: FirebaseAuth.instance.currentUser!.pa),
+    // );
 
-    FirebaseAuth.instance.currentUser!.updatePassword(senhaController.text);
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0x001F2228),
+      backgroundColor: Colors.black,
       body: SafeArea(
         top: true,
         child: Form(
@@ -117,56 +116,56 @@ class _EditarPageState extends State<EditarPage> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  width: 300,
-                  child: TextFormField(
-                    controller: senhaController,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) {
-                      if (value != null && value.isEmpty) {
-                        return "A senha deve ter de 7 a 30 caracteres";
-                      } else if (value != null && value.isNotEmpty) {
-                        if (value.length < 7 || value.length > 30) {
-                          return "A senha deve ter de 7 a 30 caracteres";
-                        } else if (!value.contains(RegExp(r'[0-9]'))) {
-                          return "A senha precisa ter 1 número";
-                        } else if (!value.contains(RegExp(r'[A-Z]'))) {
-                          return "A senha tem que ter uma letra maíscula";
-                        } else if (!value.contains(RegExp(r'[!@#$%&*]'))) {
-                          return "A senha tem que ter um caracter especial [!@#\$%*&]";
-                        }
-                        return null;
-                      }
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Senha",
-                      labelStyle: textoNotoSansBold,
-                    ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  width: 300,
-                  child: TextFormField(
-                    validator: (value) {
-                      return (value != senhaController.text ||
-                              (value != null && value.isEmpty))
-                          ? "As senhas não coincidem"
-                          : null;
-                    },
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Confirmar Senha",
-                      labelStyle: textoNotoSansBold,
-                    ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                // Container(
+                //   margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                //   width: 300,
+                //   child: TextFormField(
+                //     controller: senhaController,
+                //     autovalidateMode: AutovalidateMode.onUserInteraction,
+                //     validator: (value) {
+                //       if (value != null && value.isEmpty) {
+                //         return "A senha deve ter de 7 a 30 caracteres";
+                //       } else if (value != null && value.isNotEmpty) {
+                //         if (value.length < 7 || value.length > 30) {
+                //           return "A senha deve ter de 7 a 30 caracteres";
+                //         } else if (!value.contains(RegExp(r'[0-9]'))) {
+                //           return "A senha precisa ter 1 número";
+                //         } else if (!value.contains(RegExp(r'[A-Z]'))) {
+                //           return "A senha tem que ter uma letra maíscula";
+                //         } else if (!value.contains(RegExp(r'[!@#$%&*]'))) {
+                //           return "A senha tem que ter um caracter especial [!@#\$%*&]";
+                //         }
+                //         return null;
+                //       }
+                //     },
+                //     obscureText: true,
+                //     decoration: InputDecoration(
+                //       border: OutlineInputBorder(),
+                //       labelText: "Senha",
+                //       labelStyle: textoNotoSansBold,
+                //     ),
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ),
+                // Container(
+                //   margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                //   width: 300,
+                //   child: TextFormField(
+                //     validator: (value) {
+                //       return (value != senhaController.text ||
+                //               (value != null && value.isEmpty))
+                //           ? "As senhas não coincidem"
+                //           : null;
+                //     },
+                //     obscureText: true,
+                //     decoration: InputDecoration(
+                //       border: OutlineInputBorder(),
+                //       labelText: "Confirmar Senha",
+                //       labelStyle: textoNotoSansBold,
+                //     ),
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

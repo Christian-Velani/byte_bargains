@@ -81,6 +81,7 @@ class PerfilPage extends StatelessWidget {
                   child: RichText(
                       text: TextSpan(
                           text: "Alterar Perfil",
+                          style: TextStyle(color: Colors.white),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () =>
                                 Navigator.of(context).pushNamed("/Editar"))),
