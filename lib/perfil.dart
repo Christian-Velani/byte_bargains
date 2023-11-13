@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:byte_bargains/login.dart';
 import 'package:byte_bargains/styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -90,13 +91,37 @@ class PerfilPage extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.fromLTRB(10, 0, 0, 20),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.refresh,
+                  color: Colors.blue,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Atualizar Informações",
+                      style: TextStyle(color: Colors.white),
+                      recognizer: TapGestureRecognizer()..onTap = () {},
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
               margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
               child: SizedBox(
                 width: 250,
                 child: ElevatedButton(
                   onPressed: () {
                     Logout();
-                    Navigator.of(context).popAndPushNamed("/Login");
+                    Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      (Route<dynamic> route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

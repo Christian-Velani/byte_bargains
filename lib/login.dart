@@ -5,11 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:byte_bargains/styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final FirebaseFirestore db = FirebaseFirestore.instance;
+
   final txtNameCtrl = TextEditingController();
+
   final txtSenhaCtrl = TextEditingController();
+  IconData iconeSenha = Icons.visibility;
+  bool escondido = true;
 
   void Logar(BuildContext context) async {
     if (txtNameCtrl.text.isNotEmpty && txtSenhaCtrl.text.isNotEmpty) {
@@ -105,8 +115,20 @@ class LoginPage extends StatelessWidget {
                 width: 300,
                 child: TextField(
                   controller: txtSenhaCtrl,
-                  obscureText: false,
+                  obscureText: escondido,
                   decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(iconeSenha),
+                      onPressed: () {
+                        escondido == true
+                            ? escondido = false
+                            : escondido = true;
+                        iconeSenha == Icons.visibility
+                            ? iconeSenha = Icons.visibility_off
+                            : iconeSenha = Icons.visibility;
+                        setState(() {});
+                      },
+                    ),
                     border: OutlineInputBorder(),
                     labelText: "Senha",
                     labelStyle: textoNotoSansBold,

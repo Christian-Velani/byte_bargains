@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'styles.dart';
 
 class EditarPage extends StatefulWidget {
@@ -19,8 +18,11 @@ class _EditarPageState extends State<EditarPage> {
   XFile? image;
   final usuarioController = TextEditingController(
       text: FirebaseAuth.instance.currentUser!.displayName);
+  String emailAtual = FirebaseAuth.instance.currentUser!.email!;
   final senhaController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  IconData iconeSenha = Icons.visibility;
+  bool escondido = true;
 
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -44,11 +46,12 @@ class _EditarPageState extends State<EditarPage> {
     FirebaseAuth.instance.currentUser!
         .updateDisplayName(usuarioController.text);
 
-    // await FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(
-    //   EmailAuthProvider.credential(
-    //       email: FirebaseAuth.instance.currentUser!.email!,
-    //       password: FirebaseAuth.instance.currentUser!.pa),
-    // );
+    await FirebaseAuth.instance.currentUser!.reload();
+
+    if (senhaController.text.isNotEmpty) {
+      await FirebaseAuth.instance.currentUser!
+          .updatePassword(senhaController.text);
+    }
 
     Navigator.of(context).pop();
   }
@@ -116,56 +119,72 @@ class _EditarPageState extends State<EditarPage> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                   ),
                 ),
-                // Container(
-                //   margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                //   width: 300,
-                //   child: TextFormField(
-                //     controller: senhaController,
-                //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                //     validator: (value) {
-                //       if (value != null && value.isEmpty) {
-                //         return "A senha deve ter de 7 a 30 caracteres";
-                //       } else if (value != null && value.isNotEmpty) {
-                //         if (value.length < 7 || value.length > 30) {
-                //           return "A senha deve ter de 7 a 30 caracteres";
-                //         } else if (!value.contains(RegExp(r'[0-9]'))) {
-                //           return "A senha precisa ter 1 número";
-                //         } else if (!value.contains(RegExp(r'[A-Z]'))) {
-                //           return "A senha tem que ter uma letra maíscula";
-                //         } else if (!value.contains(RegExp(r'[!@#$%&*]'))) {
-                //           return "A senha tem que ter um caracter especial [!@#\$%*&]";
-                //         }
-                //         return null;
-                //       }
-                //     },
-                //     obscureText: true,
-                //     decoration: InputDecoration(
-                //       border: OutlineInputBorder(),
-                //       labelText: "Senha",
-                //       labelStyle: textoNotoSansBold,
-                //     ),
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ),
-                // Container(
-                //   margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                //   width: 300,
-                //   child: TextFormField(
-                //     validator: (value) {
-                //       return (value != senhaController.text ||
-                //               (value != null && value.isEmpty))
-                //           ? "As senhas não coincidem"
-                //           : null;
-                //     },
-                //     obscureText: true,
-                //     decoration: InputDecoration(
-                //       border: OutlineInputBorder(),
-                //       labelText: "Confirmar Senha",
-                //       labelStyle: textoNotoSansBold,
-                //     ),
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                // ),
+                Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Caso queira manter a senha atual, deixe em branco os campos de senha",
+                      style: textoNotoSansBold,
+                    )),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  width: 300,
+                  child: TextFormField(
+                    controller: senhaController,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value != null && value.isNotEmpty) {
+                        if (value.length < 7 || value.length > 30) {
+                          return "A senha deve ter de 7 a 30 caracteres";
+                        } else if (!value.contains(RegExp(r'[0-9]'))) {
+                          return "A senha precisa ter 1 número";
+                        } else if (!value.contains(RegExp(r'[A-Z]'))) {
+                          return "A senha tem que ter uma letra maíscula";
+                        } else if (!value.contains(RegExp(r'[!@#$%&*]'))) {
+                          return "A senha tem que ter um caracter especial [!@#\$%*&]";
+                        }
+                        return null;
+                      }
+                    },
+                    obscureText: escondido,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(iconeSenha),
+                        onPressed: () {
+                          escondido == true
+                              ? escondido = false
+                              : escondido = true;
+                          iconeSenha == Icons.visibility
+                              ? iconeSenha = Icons.visibility_off
+                              : iconeSenha = Icons.visibility;
+                          setState(() {});
+                        },
+                      ),
+                      border: OutlineInputBorder(),
+                      labelText: "Senha",
+                      labelStyle: textoNotoSansBold,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                  width: 300,
+                  child: TextFormField(
+                    autovalidateMode: AutovalidateMode.always,
+                    validator: (value) {
+                      return value != senhaController.text
+                          ? "As senhas não coincidem"
+                          : null;
+                    },
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: "Confirmar Senha",
+                      labelStyle: textoNotoSansBold,
+                    ),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(

@@ -21,6 +21,8 @@ class _CadastroPageState extends State<CadastroPage> {
   final emailController = TextEditingController();
   final senhaController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  IconData iconeSenha = Icons.visibility;
+  bool escondido = true;
 
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -187,8 +189,20 @@ class _CadastroPageState extends State<CadastroPage> {
                         return null;
                       }
                     },
-                    obscureText: true,
+                    obscureText: escondido,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: Icon(iconeSenha),
+                        onPressed: () {
+                          escondido == true
+                              ? escondido = false
+                              : escondido = true;
+                          iconeSenha == Icons.visibility
+                              ? iconeSenha = Icons.visibility_off
+                              : iconeSenha = Icons.visibility;
+                          setState(() {});
+                        },
+                      ),
                       border: OutlineInputBorder(),
                       labelText: "Senha",
                       labelStyle: textoNotoSansBold,
