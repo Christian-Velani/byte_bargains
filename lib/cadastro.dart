@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +23,7 @@ class _CadastroPageState extends State<CadastroPage> {
   final _formKey = GlobalKey<FormState>();
   IconData iconeSenha = Icons.visibility;
   bool escondido = true;
+  final db = FirebaseFirestore.instance;
 
   void subirImagem() async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -83,6 +85,10 @@ class _CadastroPageState extends State<CadastroPage> {
     } catch (e) {
       print(e);
     }
+    db
+        .collection("Listas de Desejos")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set({"Jogos": []});
   }
 
   @override
