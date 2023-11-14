@@ -25,7 +25,8 @@ class JogoGrande extends StatelessWidget {
             child: GestureDetector(
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(50), child: imagem),
-              onTap: () => Navigator.of(context).pushNamed('/Jogo'),
+              onTap: () => Navigator.of(context)
+                  .pushNamed('/Jogo', arguments: {"nomeJogo": "Minecraft"}),
             ),
           ),
         ),
