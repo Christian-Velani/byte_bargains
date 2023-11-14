@@ -25,12 +25,10 @@ class PerfilPage extends StatelessWidget {
     final local = await getExternalStorageDirectory();
     await Directory("${local!.path}/jsons").create();
     File arquivo = File("${local!.path}/jsons/jogos1.json");
-    final downloadTask = dbStorage.writeToFile(arquivo);
-    downloadTask.snapshotEvents.listen(
-      (taskSnapshot) {
-        print("Estado atual do download: ${taskSnapshot.state}");
-      },
-    );
+    if (arquivo.existsSync()) {
+      await arquivo.delete();
+    }
+    await dbStorage.writeToFile(arquivo);
     final dados = arquivo.readAsStringSync();
     Map<String, dynamic> jogos = await json.decode(dados);
     jogos.forEach(

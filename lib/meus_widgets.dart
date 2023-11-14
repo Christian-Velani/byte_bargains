@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'package:byte_bargains/styles.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class JogoGrande extends StatelessWidget {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(50), child: imagem),
               onTap: () => Navigator.of(context)
-                  .pushNamed('/Jogo', arguments: {"nomeJogo": "Minecraft"}),
+                  .pushNamed('/Jogo', arguments: {"nomeJogo": nome}),
             ),
           ),
         ),
@@ -176,10 +176,12 @@ class GeneroContainer extends StatelessWidget {
 
 class LojaPreco extends StatelessWidget {
   String nomeLoja;
-  String preco;
+  double preco;
   Estado estado;
+  double precoDesconto;
 
-  LojaPreco(this.nomeLoja, this.preco, this.estado, {super.key});
+  LojaPreco(this.nomeLoja, this.preco, this.estado,
+      {this.precoDesconto = 0.00});
 
   @override
   Widget build(BuildContext context) {

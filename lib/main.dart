@@ -1,11 +1,17 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:byte_bargains/cadastro.dart';
 import 'package:byte_bargains/editar.dart';
 import 'package:byte_bargains/jogo.dart';
 import 'package:byte_bargains/login.dart';
 import 'package:byte_bargains/perfil.dart';
 import 'package:byte_bargains/navigation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 const firebaseConfig = FirebaseOptions(
     apiKey: "AIzaSyAVUhx-6R_mnMISZN1-v97FEz_tfalj3L8",
@@ -15,9 +21,40 @@ const firebaseConfig = FirebaseOptions(
     messagingSenderId: "926471454978",
     appId: "1:926471454978:web:ed7967f205796a4691421b",
     measurementId: "G-MBRJN76MCL");
+
+void AtualizarBanco() async {
+  final db = FirebaseFirestore.instance;
+  Reference dbStorage = FirebaseStorage.instance
+      .refFromURL("gs://byte-bargains.appspot.com/Jsons/jogos1.json");
+  final local = await getExternalStorageDirectory();
+  await Directory("${local!.path}/jsons").create();
+  File arquivo = File("${local.path}/jsons/jogos1.json");
+  if (arquivo.existsSync()) {
+    await arquivo.delete();
+  }
+  await dbStorage.writeToFile(arquivo);
+  final dados = arquivo.readAsStringSync();
+  Map<String, dynamic> jogos = await json.decode(dados);
+  jogos.forEach(
+    (key, value) {
+      db.collection("Jogos").doc(key).set(
+        {
+          "Nome do Jogo": key,
+          "Gêneros": jogos[key]["genre"],
+          "Descrição": jogos[key]["description"],
+          "Imagem": jogos[key]["img"],
+          "Lojas": jogos[key]["shops"]
+        },
+        SetOptions(merge: true),
+      );
+    },
+  );
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: firebaseConfig);
+  AtualizarBanco();
   runApp(const MyApp());
 }
 

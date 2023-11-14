@@ -42,7 +42,7 @@ class _JogoPageState extends State<JogoPage> {
                         height: 350,
                         child: Image.network(
                           data!["Imagem"],
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       FloatingActionButton(
@@ -108,13 +108,30 @@ class _JogoPageState extends State<JogoPage> {
                   SizedBox(
                     height: 330,
                     width: 321,
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        LojaPreco("Loja 1", "100", Estado.normal),
-                        LojaPreco("Loja 1", "100", Estado.indisponivel),
-                        LojaPreco("Loja 1", "100", Estado.desconto),
-                      ],
+                    child: ListView.builder(
+                      itemCount: data["Lojas"].length,
+                      itemBuilder: (context, index) {
+                        return LojaPreco(
+                          data["Lojas"][index]['shop'],
+                          data["Lojas"][index]['prices']["initial_price"] !=
+                                  "indsiponível"
+                              ? data["Lojas"][index]['prices']["initial_price"]
+                              : 0.0,
+                          data["Lojas"][index]['prices']["discount"] == 0.0
+                              ? Estado.normal
+                              : data["Lojas"][index]['prices']["discount"] !=
+                                      "indsiponível"
+                                  ? Estado.desconto
+                                  : Estado.indisponivel,
+                          precoDesconto: (data["Lojas"][index]['prices']
+                                          ["discount"] ==
+                                      0.0 ||
+                                  data["Lojas"][index]['prices']["discount"] ==
+                                      "indsiponível")
+                              ? 0.0
+                              : data["Lojas"][index]['prices']['final_price'],
+                        );
+                      },
                     ),
                   )
                 ],
