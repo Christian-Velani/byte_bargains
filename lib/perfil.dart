@@ -19,34 +19,6 @@ class PerfilPage extends StatelessWidget {
     await FirebaseAuth.instance.signOut();
   }
 
-  void AtualizarBanco() async {
-    Reference dbStorage = FirebaseStorage.instance
-        .refFromURL("gs://byte-bargains.appspot.com/Jsons/jogos1.json");
-    final local = await getExternalStorageDirectory();
-    await Directory("${local!.path}/jsons").create();
-    File arquivo = File("${local!.path}/jsons/jogos1.json");
-    if (arquivo.existsSync()) {
-      await arquivo.delete();
-    }
-    await dbStorage.writeToFile(arquivo);
-    final dados = arquivo.readAsStringSync();
-    Map<String, dynamic> jogos = await json.decode(dados);
-    jogos.forEach(
-      (key, value) {
-        db.collection("Jogos").doc(key).set(
-          {
-            "Nome do Jogo": key,
-            "Gêneros": jogos[key]["genre"],
-            "Descrição": jogos[key]["description"],
-            "Imagem": jogos[key]["img"],
-            "Lojas": jogos[key]["shops"]
-          },
-          SetOptions(merge: true),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,30 +92,6 @@ class PerfilPage extends StatelessWidget {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () =>
                                 Navigator.of(context).pushNamed("/Editar"))),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(10, 0, 0, 20),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.refresh,
-                  color: Colors.blue,
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Atualizar Informações",
-                      style: TextStyle(color: Colors.white),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () {
-                          AtualizarBanco();
-                        },
-                    ),
-                  ),
                 ),
               ],
             ),

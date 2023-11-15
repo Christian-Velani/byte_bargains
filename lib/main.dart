@@ -22,39 +22,9 @@ const firebaseConfig = FirebaseOptions(
     appId: "1:926471454978:web:ed7967f205796a4691421b",
     measurementId: "G-MBRJN76MCL");
 
-void AtualizarBanco() async {
-  final db = FirebaseFirestore.instance;
-  Reference dbStorage = FirebaseStorage.instance
-      .refFromURL("gs://byte-bargains.appspot.com/Jsons/jogos1.json");
-  final local = await getExternalStorageDirectory();
-  await Directory("${local!.path}/jsons").create();
-  File arquivo = File("${local.path}/jsons/jogos1.json");
-  if (arquivo.existsSync()) {
-    await arquivo.delete();
-  }
-  await dbStorage.writeToFile(arquivo);
-  final dados = arquivo.readAsStringSync();
-  Map<String, dynamic> jogos = await json.decode(dados);
-  jogos.forEach(
-    (key, value) {
-      db.collection("Jogos").doc(key).set(
-        {
-          "Nome do Jogo": key,
-          "Gêneros": jogos[key]["genre"],
-          "Descrição": jogos[key]["description"],
-          "Imagem": jogos[key]["img"],
-          "Lojas": jogos[key]["shops"]
-        },
-        SetOptions(merge: true),
-      );
-    },
-  );
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: firebaseConfig);
-  AtualizarBanco();
   runApp(const MyApp());
 }
 

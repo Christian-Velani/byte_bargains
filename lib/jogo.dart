@@ -145,7 +145,7 @@ class _JogoPageState extends State<JogoPage> {
                                   data["Lojas"][index]['shop'],
                                   data["Lojas"][index]['prices']
                                               ["initial_price"] !=
-                                          "indsiponível"
+                                          "Indisponível"
                                       ? data["Lojas"][index]['prices']
                                           ["initial_price"]
                                       : 0.0,
@@ -154,7 +154,7 @@ class _JogoPageState extends State<JogoPage> {
                                       ? Estado.normal
                                       : data["Lojas"][index]['prices']
                                                   ["discount"] !=
-                                              "indsiponível"
+                                              "Indisponível"
                                           ? Estado.desconto
                                           : Estado.indisponivel,
                                   precoDesconto: (data["Lojas"][index]['prices']
@@ -162,7 +162,7 @@ class _JogoPageState extends State<JogoPage> {
                                               0.0 ||
                                           data["Lojas"][index]['prices']
                                                   ["discount"] ==
-                                              "indsiponível")
+                                              "Indisponível")
                                       ? 0.0
                                       : data["Lojas"][index]['prices']
                                           ['final_price'],

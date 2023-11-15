@@ -79,7 +79,8 @@ class JogoPequeno extends StatelessWidget {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(5), child: imagem),
           ),
-          onTap: () => Navigator.of(context).pushNamed('/Jogo'),
+          onTap: () => Navigator.of(context)
+              .pushNamed('/Jogo', arguments: {"nomeJogo": nome}),
         ),
         Text(nome, style: textoOpenSansRegularPequeno)
       ],
@@ -224,7 +225,7 @@ class LojaPreco extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.all(10),
                             child: Text(
-                              "R\$$preco",
+                              "R\$$precoDesconto",
                               style: textoPrecoDesconto,
                             ),
                           ),
