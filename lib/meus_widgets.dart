@@ -119,7 +119,8 @@ class _JogoPequenoHorizontalState extends State<JogoPequenoHorizontal> {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(5), child: widget.imagem),
             ),
-            onTap: () => Navigator.of(context).pushNamed('/Jogo'),
+            onTap: () => Navigator.of(context)
+                .pushNamed('/Jogo', arguments: {"nomeJogo": widget.nome}),
           ),
           Text(widget.nome, style: textoOpenSansSemiBold),
           const Spacer(),

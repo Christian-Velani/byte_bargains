@@ -1,5 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:byte_bargains/meus_widgets.dart';
 import 'package:byte_bargains/styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 
 class PesquisaPage extends StatefulWidget {
@@ -10,70 +14,97 @@ class PesquisaPage extends StatefulWidget {
 }
 
 class _PesquisaPageState extends State<PesquisaPage> {
+  final db = FirebaseFirestore.instance;
+  TextEditingController textoPesquisa = TextEditingController();
+  var resultados;
+  var valorPesquisado;
+  void pesquisar(String pesquisa) async {
+    resultados = true;
+    valorPesquisado = pesquisa;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Pesquisar",
-                labelStyle: textoNotoSansBold,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
+    return ConditionalBuilder(
+        condition: resultados != null,
+        builder: (context) =>
+            StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: db
+                  .collection("Jogos")
+                  .where("Nome do Jogo", isEqualTo: valorPesquisado)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) return CircularProgressIndicator();
+                var data = snapshot.data!.docs;
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextField(
+                          controller: textoPesquisa,
+                          onEditingComplete: () {
+                            if (textoPesquisa.text.length >= 4) {
+                              pesquisar(textoPesquisa.text);
+                            }
+                            setState(() {});
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Pesquisar",
+                            labelStyle: textoNotoSansBold,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Text("Resultados da Pesquisa", style: textoNotoSansBold),
+                      SizedBox(
+                        height: 531,
+                        child: ListView(
+                            scrollDirection: Axis.vertical,
+                            children: data
+                                .map((doc) => JogoPequenoHorizontal(
+                                    imagem: Image.network(
+                                      doc["Imagem"],
+                                      fit: BoxFit.fill,
+                                    ),
+                                    nome: doc['Nome do Jogo']))
+                                .toList()),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+        fallback: (context) => SingleChildScrollView(
+                child: Column(children: [
+              SizedBox(
+                width: double.infinity,
+                child: TextField(
+                  controller: textoPesquisa,
+                  onEditingComplete: () {
+                    if (textoPesquisa.text.length >= 4) {
+                      pesquisar(textoPesquisa.text);
+                    }
+                    setState(() {});
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: "Pesquisar",
+                    labelStyle: textoNotoSansBold,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          // Text(
-          //   "Resultados da Pesquisa",
-          //   style: textoNotoSansBoldGrande,
-          // ),
-          // SizedBox(
-          //   height: 531,
-          //   child: ListView(
-          //     scrollDirection: Axis.vertical,
-          //     children: [
-          //       JogoPequenoHorizontal(
-          //           imagem: Image.network(
-          //             'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
-          //             fit: BoxFit.cover,
-          //           ),
-          //           nome: "Jogo 1"),
-          //       JogoPequenoHorizontal(
-          //           imagem: Image.network(
-          //             'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
-          //             fit: BoxFit.cover,
-          //           ),
-          //           nome: "Jogo 1"),
-          //       JogoPequenoHorizontal(
-          //           imagem: Image.network(
-          //             'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
-          //             fit: BoxFit.cover,
-          //           ),
-          //           nome: "Jogo 1"),
-          //       JogoPequenoHorizontal(
-          //           imagem: Image.network(
-          //             'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
-          //             fit: BoxFit.cover,
-          //           ),
-          //           nome: "Jogo 1"),
-          //       JogoPequenoHorizontal(
-          //           imagem: Image.network(
-          //             'https://play-lh.googleusercontent.com/VSwHQjcAttxsLE47RuS4PqpC4LT7lCoSjE7Hx5AW_yCxtDvcnsHHvm5CTuL5BPN-uRTP',
-          //             fit: BoxFit.cover,
-          //           ),
-          //           nome: "Jogo 1"),
-          //     ],
-          //   ),
-          // )
-        ],
-      ),
-    );
+              Text("Resultados da Pesquisa", style: textoNotoSansBold),
+            ])));
   }
 }
