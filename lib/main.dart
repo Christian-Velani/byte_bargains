@@ -1,15 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:byte_bargains/cadastro.dart';
 import 'package:byte_bargains/editar.dart';
 import 'package:byte_bargains/jogo.dart';
 import 'package:byte_bargains/login.dart';
 import 'package:byte_bargains/perfil.dart';
 import 'package:byte_bargains/navigation.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 const firebaseConfig = FirebaseOptions(
@@ -32,13 +27,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: {
-      "/Cadastro": (context) => CadastroPage(),
-      "/Login": (context) => LoginPage(),
-      "/Perfil": (context) => PerfilPage(),
-      "/Principal": (context) => NavigationPage(),
-      "/Editar": (context) => EditarPage(),
-      "/Jogo": (context) => JogoPage(),
-    }, initialRoute: '/Login');
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        routes: {
+          "/Cadastro": (context) => CadastroPage(),
+          "/Login": (context) => LoginPage(),
+          "/Perfil": (context) => PerfilPage(),
+          "/Principal": (context) => const NavigationPage(),
+          "/Editar": (context) => EditarPage(),
+          "/Jogo": (context) => JogoPage(),
+        },
+        initialRoute: '/Login');
   }
 }

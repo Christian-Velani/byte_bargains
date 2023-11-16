@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
 
 import 'package:byte_bargains/meus_widgets.dart';
 import 'package:byte_bargains/styles.dart';
@@ -34,7 +34,9 @@ class _PesquisaPageState extends State<PesquisaPage> {
                   .where("Nome do Jogo", isEqualTo: valorPesquisado)
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return CircularProgressIndicator();
+                if (!snapshot.hasData) {
+                  return CircularProgressIndicator();
+                }
                 var data = snapshot.data!.docs;
                 return SingleChildScrollView(
                   child: Column(

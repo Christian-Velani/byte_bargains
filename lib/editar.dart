@@ -29,6 +29,7 @@ class _EditarPageState extends State<EditarPage> {
     setState(() {});
   }
 
+  // ignore: non_constant_identifier_names
   void AtualizarCadastro() async {
     if (image != null) {
       final storageRef =
@@ -144,6 +145,7 @@ class _EditarPageState extends State<EditarPage> {
                         }
                         return null;
                       }
+                      return null;
                     },
                     obscureText: escondido,
                     decoration: InputDecoration(

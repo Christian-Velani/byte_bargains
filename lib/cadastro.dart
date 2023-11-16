@@ -82,8 +82,6 @@ class _CadastroPageState extends State<CadastroPage> {
           },
         );
       }
-    } catch (e) {
-      print(e);
     }
     db
         .collection("Listas de Desejos")

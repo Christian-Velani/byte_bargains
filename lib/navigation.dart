@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:byte_bargains/lista_desejos.dart';
-import 'package:byte_bargains/meus_widgets.dart';
 import 'package:byte_bargains/pesquisa.dart';
 import 'package:byte_bargains/principal.dart';
 import 'package:byte_bargains/styles.dart';

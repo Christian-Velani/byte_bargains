@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'dart:math';
 
@@ -27,12 +27,20 @@ class PrincipalPage extends StatelessWidget {
         if (jogosDesejados.length >= 5) {
           var rng = Random();
           for (var i = 0; i < 5; i++) {
-            numeros.add(rng.nextInt(jogosDesejados.length));
+            int numeroGerado = rng.nextInt(jogosDesejados.length);
+            while (numeros.contains(numeroGerado)) {
+              numeroGerado = rng.nextInt(jogosDesejados.length);
+            }
+            numeros.add(numeroGerado);
           }
         } else {
           var rng = Random();
           for (var i = 0; i < jogosDesejados.length; i++) {
-            numeros.add(rng.nextInt(jogosDesejados.length));
+            int numeroGerado = rng.nextInt(jogosDesejados.length);
+            while (numeros.contains(numeroGerado)) {
+              numeroGerado = rng.nextInt(jogosDesejados.length);
+            }
+            numeros.add(numeroGerado);
           }
         }
         return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

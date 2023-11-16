@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously, prefer_const_constructors_in_immutables, non_constant_identifier_names
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   void Logar(BuildContext context) async {
     if (txtNameCtrl.text.isNotEmpty && txtSenhaCtrl.text.isNotEmpty) {
       try {
-        final credential = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(
-                email: txtNameCtrl.text, password: txtSenhaCtrl.text);
         Navigator.of(context).pushNamed("/Principal");
       } on FirebaseAuthException catch (e) {
         if (e.code == "invalid-email") {
@@ -98,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                 alignment: Alignment.center,
                 child: Image.asset("images/icon.png"),
               ),
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
                   controller: txtNameCtrl,
@@ -111,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 300,
                 child: TextField(
                   controller: txtSenhaCtrl,

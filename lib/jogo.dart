@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, curly_braces_in_flow_control_structures, use_key_in_widget_constructors
 
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:byte_bargains/meus_widgets.dart';
@@ -57,7 +57,7 @@ class _JogoPageState extends State<JogoPage> {
                                 width: double.infinity,
                                 height: 350,
                                 child: Image.network(
-                                  data!["Imagem"],
+                                  data["Imagem"],
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -79,11 +79,11 @@ class _JogoPageState extends State<JogoPage> {
                                   child: Column(
                                     children: [
                                       Text(
-                                        data!["Nome do Jogo"],
+                                        data["Nome do Jogo"],
                                         style: textoNotoSansBoldGrande,
                                       ),
                                       Text(
-                                        data!["Descrição"],
+                                        data["Descrição"],
                                         style: textoOpenSansRegularPequeno,
                                       )
                                     ],
@@ -103,7 +103,7 @@ class _JogoPageState extends State<JogoPage> {
                               onPressed: () {
                                 if (icone == Icons.favorite_outline) {
                                   icone = Icons.favorite;
-                                  jogosDesejados.add(data!["Nome do Jogo"]);
+                                  jogosDesejados.add(data["Nome do Jogo"]);
                                   db
                                       .collection("Listas de Desejos")
                                       .doc(FirebaseAuth
@@ -111,7 +111,7 @@ class _JogoPageState extends State<JogoPage> {
                                       .update({"Jogos": jogosDesejados});
                                 } else {
                                   icone = Icons.favorite_outline;
-                                  jogosDesejados.remove(data!["Nome do Jogo"]);
+                                  jogosDesejados.remove(data["Nome do Jogo"]);
                                   db
                                       .collection("Listas de Desejos")
                                       .doc(FirebaseAuth
